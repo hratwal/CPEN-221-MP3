@@ -11,8 +11,9 @@ import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 
+
 /**
- * The {@link Velociraptor} is an {@link ArenaAnimal} that eats {@link /*items*/} and can
+ * The {@link Velociraptor} is an {@link ArenaAnimal} that eats {@link items} and can
  * be eaten by {@link NOTHING}.
  */
 public class Velociraptor implements ArenaAnimal {

@@ -22,7 +22,7 @@ public class Human implements ArenaAnimal {
 	private static final int STRENGTH = 300;
 	private static final int MIN_BREEDING_ENERGY = 201;
 	private static final int VIEW_RANGE = 3;
-	private static final int COOLDOWN = 2;
+	private static final int COOLDOWN = 5;
 	private static final ImageIcon humanImage = Util.loadImage("men.gif");
 
 	private final AI ai;
