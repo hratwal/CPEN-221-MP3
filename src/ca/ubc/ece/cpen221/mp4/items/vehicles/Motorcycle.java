@@ -55,7 +55,7 @@ public class Motorcycle extends Vehicle{
         
         super.setAI(motorcycleAI);
         this.setAI(motorcycleAI);
-        super.setDirection(Direction.NORTH);
+        super.setDirection(super.randomDirection());
     }
 
 }

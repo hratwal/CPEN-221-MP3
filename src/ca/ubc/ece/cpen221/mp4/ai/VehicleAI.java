@@ -49,11 +49,15 @@ public class VehicleAI{
      */
     
     public Command getNextAction(World world, Vehicle vehicle) {
+        vehicle.incrementStepsSinceTurn();
         Location curr = vehicle.getLocation();
         Direction dir = vehicle.getDir();
         Set<Location> dangerZones = getNearbyDangerZones(world, vehicle);
         Iterator<Location> it = dangerZones.iterator();
-        boolean needToChangeDir = false;
+        boolean needToChangeDir = (vehicle.getStepsSinceTurn() > 20);
+        //automatically changes directions after 20 turns for variety
+        
+        
         // checks if there are any dangers in the direction it's currently
         // moving
 
@@ -89,7 +93,9 @@ public class VehicleAI{
         } else {
             if (canTurn(vehicle)) {
                 dir = newDirection(vehicle, world);
+                vehicle.setDirection(dir);
                 Location target = new Location(curr, dir);
+                vehicle.resetStepsSinceTurn();
                 return vehicleMovement(world, target, vehicle);    
                 
             } else {
@@ -186,9 +192,7 @@ public class VehicleAI{
         }
         return null;
     }
-    
-    //BUG: get an Invalid MoveCommand when a Truck and Motorcycle collide
-    //Probably shows up when other vehicles collide as well
+
     /**
      * Called when a vehicle tries to move into a space that is already occupied,
      * should destroy whichever of the two have lower strength (or both if
@@ -200,9 +204,9 @@ public class VehicleAI{
      */
     private void collision(Vehicle vehicle, Item occupant) {
         if (occupant.getStrength() < vehicle.getStrength()){
-            occupant.loseEnergy(100000);// should kill it
+            occupant.loseEnergy(Integer.MAX_VALUE);
         }else if (occupant.getStrength() == vehicle.getStrength()){
-            occupant.loseEnergy(100000);
+            occupant.loseEnergy(Integer.MAX_VALUE);
             vehicle.loseEnergy(vehicle.getINITIAL_ENERGY());
         }else
             vehicle.loseEnergy(vehicle.getINITIAL_ENERGY());
@@ -237,11 +241,30 @@ public class VehicleAI{
                 Item occupant = findTargetItem(world, target, vehicle);
                 // if this returns null we got a problem
                 collision(vehicle, occupant);
+                
+                if(occupant instanceof Vehicle){
+                    return new WaitCommand();
+                }else{
+                    return new MoveCommand(vehicle, target);
+                }
+                /*This if-else block is somewhat kludgy, but otherwise it throws
+                 * an error if two vehicles collide. This is because the stronger
+                 * vehicle tries to move into the space occupied by the weaker vehicle
+                 * before the world can get rid of the dead weaker vehicle.
+                 * This way, the stronger vehicle politely waits for the body to
+                 * disappear before continuing on its way.
+                 * 
+                 * For some reason, this doesn't happen with collisions with
+                 *  other Items. Will look into it later.
+                 * */
+                
+                
+            }else{
+                return new MoveCommand(vehicle, target);//I think this line causes the bug
             }
-            return new MoveCommand(vehicle, target);//I think this line causes the bug
         } else {
             vehicle.loseEnergy(vehicle.getINITIAL_ENERGY());
-            // currently vehicles die if they to drive off the edge
+            // currently vehicles die if they drive off the edge
             // of the world
             return new WaitCommand();
         }

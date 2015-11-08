@@ -53,7 +53,7 @@ public class Truck extends Vehicle{
         super.setIsDead(false);
         
         super.setAI(truckAI);
-        super.setDirection(Direction.NORTH);
+        super.setDirection(super.randomDirection());
     }
     
 }

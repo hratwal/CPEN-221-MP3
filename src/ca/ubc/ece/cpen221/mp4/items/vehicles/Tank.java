@@ -54,6 +54,6 @@ public class Tank extends Vehicle{
         super.setIsDead(false);
         
         super.setAI(tankAI);
-        super.setDirection(Direction.NORTH);
+        super.setDirection(super.randomDirection());
     }
 }

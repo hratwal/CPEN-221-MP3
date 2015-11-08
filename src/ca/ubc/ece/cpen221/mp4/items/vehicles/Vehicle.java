@@ -31,6 +31,7 @@ public abstract class Vehicle implements MoveableItem, Actor{
     private int energy;
     private int currentCooldown;
     private Direction dir;
+    private int stepsSinceTurn = 0;
     
     public int getCoolDownPeriod(){
         return currentCooldown;
@@ -180,6 +181,24 @@ public abstract class Vehicle implements MoveableItem, Actor{
     public int getACCEL_TURNS(){
         return ACCEL_TURNS;
     }
+    
+    /**
+     * 
+     * @return number of steps since the vehicle turned
+     */
+    public int getStepsSinceTurn(){
+        return stepsSinceTurn;
+    }
+    
+    public void resetStepsSinceTurn(){
+        stepsSinceTurn = 0;
+    }
+    
+    public void incrementStepsSinceTurn(){
+        stepsSinceTurn++;
+    }
+    
+    
 
     /**
      * Causes this Item to lose energy. 
@@ -264,7 +283,17 @@ public abstract class Vehicle implements MoveableItem, Actor{
         this.ai = ai;
     }
     
-    protected void setDirection(Direction dir){
+    public void setDirection(Direction dir){
         this.dir = dir;
+    }
+    
+    public Direction randomDirection(){
+        ArrayList<Direction> directions = new ArrayList<Direction>();
+        directions.add(Direction.EAST);
+        directions.add(Direction.WEST);
+        directions.add(Direction.NORTH);
+        directions.add(Direction.SOUTH);
+        double rand = Math.random() * 4;
+        return directions.get((int) rand);
     }
 }
