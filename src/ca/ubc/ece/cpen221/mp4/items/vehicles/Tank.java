@@ -14,7 +14,7 @@ import ca.ubc.ece.cpen221.mp4.Util;
 public class Tank extends Vehicle{
     
     private static final int INITIAL_ENERGY = 200;
-    private static final int STRENGTH = 1000;
+    private static final int STRENGTH = 1200;
     private static final int VIEW_RANGE = 6;
     private static final int START_COOLDOWN = 12;
     private static final int MIN_COOLDOWN = 6;

@@ -15,15 +15,15 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * The {@link Rabbit} is an {@link ArenaAnimal} that eats {@link Grass} and can
  * be eaten by {@link Fox}.
  */
-public class Spider implements ArenaAnimal {
+public class Human implements ArenaAnimal {
 
-    private static final int INITIAL_ENERGY = 5;
-    private static final int MAX_ENERGY = 10;
-    private static final int STRENGTH = 10;
-    private static final int MIN_BREEDING_ENERGY = 5;
-    private static final int VIEW_RANGE = 2;
-    private static final int COOLDOWN = 1;
-    private static final ImageIcon spiderImage = Util.loadImage("spider.gif");
+    private static final int INITIAL_ENERGY = 200;
+    private static final int MAX_ENERGY = 300;
+    private static final int STRENGTH = 300;
+    private static final int MIN_BREEDING_ENERGY = 201;
+    private static final int VIEW_RANGE = 3;
+    private static final int COOLDOWN = 5;
+    private static final ImageIcon humanImage = Util.loadImage("men.gif");
 
     private final AI ai;
 
@@ -40,15 +40,15 @@ public class Spider implements ArenaAnimal {
      * @param initialLocation
      *            : the location where this rabbit will be created
      */
-    public Spider(AI spiderAI, Location initialLocation) {
-        ai = spiderAI;
+    public Human(AI humanAI, Location initialLocation) {
+        ai = humanAI;
         location = initialLocation;
         energy = INITIAL_ENERGY;
     }
 
     @Override
     public LivingItem breed() {
-        Spider child = new Spider(ai, location);
+        Human child = new Human(ai, location);
         child.energy = energy / 2;
         this.energy = energy / 2;
         return child;
@@ -70,9 +70,10 @@ public class Spider implements ArenaAnimal {
         return energy;
     }
 
+
     @Override
     public ImageIcon getImage() {
-        return spiderImage;
+        return humanImage;
     }
 
     @Override
@@ -104,7 +105,7 @@ public class Spider implements ArenaAnimal {
 
     @Override
     public String getName() {
-        return "Spider";
+        return "Human";
     }
 
     @Override
@@ -116,7 +117,7 @@ public class Spider implements ArenaAnimal {
 
     @Override
     public int getPlantCalories() {
-        // This Spider is not a plant.
+        // This Human is not a plant.
         return 0;
     }
 
@@ -143,5 +144,6 @@ public class Spider implements ArenaAnimal {
     @Override
     public void moveTo(Location targetLocation) {
         location = targetLocation;
+
     }
 }
