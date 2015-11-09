@@ -7,6 +7,7 @@ import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
 import ca.ubc.ece.cpen221.mp4.ai.AI;
+import ca.ubc.ece.cpen221.mp4.ai.HumanAI;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
@@ -23,9 +24,9 @@ public class Human implements ArenaAnimal {
     private static final int MIN_BREEDING_ENERGY = 201;
     private static final int VIEW_RANGE = 3;
     private static final int COOLDOWN = 5;
-    private static final ImageIcon humanImage = Util.loadImage("men.gif");
+    private static final ImageIcon humanImage = Util.loadImage("man.gif");
 
-    private final AI ai;
+    private final HumanAI ai;
 
     private Location location;
     private int energy;
@@ -40,7 +41,7 @@ public class Human implements ArenaAnimal {
      * @param initialLocation
      *            : the location where this rabbit will be created
      */
-    public Human(AI humanAI, Location initialLocation) {
+    public Human(HumanAI humanAI, Location initialLocation) {
         ai = humanAI;
         location = initialLocation;
         energy = INITIAL_ENERGY;
@@ -48,7 +49,8 @@ public class Human implements ArenaAnimal {
 
     @Override
     public LivingItem breed() {
-        Human child = new Human(ai, location);
+        HumanAI childAI = new HumanAI();
+        Human child = new Human(childAI, location);
         child.energy = energy / 2;
         this.energy = energy / 2;
         return child;
@@ -57,7 +59,8 @@ public class Human implements ArenaAnimal {
     @Override
     public void eat(Food food) {
         // Note that energy does not exceed energy limit.
-        energy = Math.min(MAX_ENERGY, energy + food.getPlantCalories());
+        int calories = Math.max(food.getMeatCalories(), food.getPlantCalories());
+        energy = Math.min(MAX_ENERGY, energy + calories);
     }
 
     @Override

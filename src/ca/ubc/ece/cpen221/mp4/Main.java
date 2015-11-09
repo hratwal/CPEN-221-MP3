@@ -32,7 +32,7 @@ public class Main {
 	static final int INITIAL_TANKS = INITIAL_GRASS / 200;
 	static final int INITIAL_TRUCKS = INITIAL_GRASS / 150;
 	static final int INITIAL_MOTORCYCLES = INITIAL_GRASS / 64;
-	static final int INITIAL_MANS = INITIAL_GRASS / 150;
+	static final int INITIAL_MANS = INITIAL_GRASS / 64;
 	static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
 
@@ -61,6 +61,7 @@ public class Main {
 		addTrucks(world);
 		addMotorcycles(world);
 		addTanks(world);
+		addHumans(world);
 		// TODO: You may add your own creatures here!
 	}
 
@@ -127,6 +128,16 @@ public class Main {
             Truck truck = new Truck(vehicleAI, loc);
             world.addItem(truck);
             world.addActor(truck);
+        }
+    }
+    
+    private void addHumans(World world){
+        HumanAI humanAI = new HumanAI();
+        for(int i = 0; i < INITIAL_MANS; i++){
+            Location loc = Util.getRandomEmptyLocation(world);
+            Human human = new Human(humanAI, loc);
+            world.addItem(human);
+            world.addActor(human);
         }
     }
 }

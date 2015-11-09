@@ -3,7 +3,7 @@ package ca.ubc.ece.cpen221.mp4;
 /**
  * Represents an (x, y) location in the world.
  */
-public final class Location {
+public class Location {
 
 	private int x;
 	private int y;
