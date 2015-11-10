@@ -50,22 +50,16 @@ public class HumanAI extends ArenaAnimalAI {
         }
         return tryToEat(world, human, foods, surroundingThings);
     }
-
-    private Set<Location> identifyDangers(ArenaWorld world, ArenaAnimal human, 
-            Set<Item> surroundings) {
-        Set<Location> dangerZones = new HashSet<Location>();
-        Iterator<Item> it = surroundings.iterator();
-        while (it.hasNext()) {
-            Item item = it.next();
-            if (item.getStrength() > human.getStrength() && 
-                    !(item instanceof Condo) && 
-                    !(item instanceof Factory)) {
-                dangerZones.add(item.getLocation());
-            }
-        }
-        return dangerZones;
-    }
-
+    
+    /**
+     * returns a set of locations that contain potential food Items in 
+     * eyesight of the human
+     * @param world: the world the human exists in
+     * @param human: the human in question
+     * @param surroundings: a set of all Items that the human can see
+     * @return: a set of locations containing edible items within eyesight
+     * of the human
+     */
     private Set<Location> identifyFood(ArenaWorld world, ArenaAnimal human, 
             Set<Item> surroundings) {
         Set<Location> foodZones = new HashSet<Location>();
@@ -79,60 +73,20 @@ public class HumanAI extends ArenaAnimalAI {
         }
         return foodZones;
     }
-
-    private Command runAway(ArenaWorld world, ArenaAnimal human, Set<Location> dangers) {
-        Iterator<Location> it = dangers.iterator();
-        Location nearestDanger = it.next();
-        int currentClosestDistance = human.getLocation().getDistance(nearestDanger);
-        while (it.hasNext()) {
-            Location curr = it.next();
-            if (human.getLocation().getDistance(curr) > currentClosestDistance) {
-                nearestDanger = curr;
-                currentClosestDistance = human.getLocation().getDistance(curr);
-            }
-        }
-        int xDiff = human.getLocation().getX() - nearestDanger.getX();
-        //positive if danger is to the WEST
-        int yDiff = human.getLocation().getY() - nearestDanger.getY();
-        //positive if danger is to the NORTH
-        
-        Location target = new Location(human.getLocation());
-        if (xDiff != 0) {
-            
-            if (xDiff > 0) {// case: danger is to the WEST
-                target = new Location(human.getLocation(), Direction.EAST);
-            }else if(xDiff < 0){// case: danger is to the EAST
-                target = new Location(human.getLocation(), Direction.WEST);
-            }if(Util.isValidLocation(world, target) && 
-                    isLocationEmpty(world, human, target)){
-                return new MoveCommand(human, target);
-            }
-        }
-        if(yDiff <= 0){
-            target = new Location(human.getLocation(), Direction.NORTH);
-        }else{
-            target = new Location(human.getLocation(), Direction.SOUTH);
-        }
-        if(Util.isValidLocation(world, target) && 
-                isLocationEmpty(world, human, target)){
-            return new MoveCommand(human, target);
-        }
-        return panic(world, human, nearestDanger);
-    }
     
     /**
-     * governs behavior if blocked from moving away from danger. Intent is for humans
-     * to try to build something to save themselves. Currently they just wait
+     * Causes the human to try to either breed or build a Condo or Factory (they
+     * will alternate between breeding and building). If the human is blocked 
+     * from doing so, it will try to eat instead.
      * 
-     * @param world
-     * @param human
-     * @return
+     * @param world: the world the human exists in
+     * @param human: the human in question
+     * @param foods: a Set of Locations containing viable foods within eyesight
+     * of the human
+     * @param surroundingThings: a Set of all the Items visible to the human
+     * @return either a Breed or BuildCommand, or if neither of those is possible
+     * the resultant command from the human trying to eat instead
      */
-
-    private Command panic(ArenaWorld world, ArenaAnimal human, Location danger){
-        return new WaitCommand();
-    }
-    
     private Command breedOrBuild(ArenaWorld world, ArenaAnimal human, 
             Set<Location> foods, Set<Item> surroundingThings){
         Location target = new Location(human.getLocation());
@@ -161,87 +115,8 @@ public class HumanAI extends ArenaAnimalAI {
             return new BuildCommand(human, target);
         }
     }
+ 
     
-    private Command tryToEat(ArenaWorld world, ArenaAnimal human, 
-            Set<Location> foods, Set<Item> surroundingThings){
-        if(foods.size() == 0){
-            return wanderAimlessly(world, human);
-        }
-        Iterator<Location> locationIt = foods.iterator();
-        Location nearest = locationIt.next();
-        int lowestDistance = nearest.getDistance(human.getLocation());
-        while(locationIt.hasNext()){
-            Location current = locationIt.next();
-            int currentDistance = current.getDistance(human.getLocation());
-            if(currentDistance < lowestDistance){
-                nearest = current;
-                lowestDistance = currentDistance;
-            }
-        }
-        Iterator<Item> itemIt = surroundingThings.iterator();
-        Item nearestFood = itemIt.next();
-        while(itemIt.hasNext()){
-            Item currentItem = itemIt.next();
-            if(currentItem.getLocation().equals(nearest))
-                nearestFood = currentItem;
-        }
-        if(lowestDistance == 1){
-            return new EatCommand(human, nearestFood);
-        }else{
-            int xDiff = human.getLocation().getX() - nearest.getX();
-            //positive if food is to the WEST
-            int yDiff = human.getLocation().getY() - nearest.getY();
-            //positive if food is to the NORTH
-            
-            Location target = new Location(human.getLocation());
-            if (xDiff != 0) {
-                
-                if (xDiff > 0) {// case: food is to the WEST
-                    target = new Location(human.getLocation(), Direction.WEST);
-                }else if(xDiff < 0){// case: food is to the EAST
-                    target = new Location(human.getLocation(), Direction.EAST);
-                }if(Util.isValidLocation(world, target) && 
-                        isLocationEmpty(world, human, target)){
-                    return new MoveCommand(human, target);
-                }
-            }
-            if(yDiff <= 0){
-                target = new Location(human.getLocation(), Direction.SOUTH);
-            }else{
-                target = new Location(human.getLocation(), Direction.NORTH);
-            }
-            if(Util.isValidLocation(world, target) &&
-                    isLocationEmpty(world, human, target)){
-                return new MoveCommand(human, target);
-            }
-        }
-        return new WaitCommand();
-        //return wanderAimlessly(world, human);
-    }
-    
-    private Command wanderAimlessly(ArenaWorld world, ArenaAnimal human){
-        Location target = new Location(human.getLocation());
-        ArrayList<Direction> directions = new ArrayList<Direction>();
-        directions.add(Direction.EAST);
-        directions.add(Direction.WEST);
-        directions.add(Direction.NORTH);
-        directions.add(Direction.SOUTH);
-        int counter = 0;
-        while(counter < 4){
-            target = new Location(human.getLocation(), directions.get(counter));
-            if(Util.isValidLocation(world, target) && 
-                    isLocationEmpty(world, human, target)){
-                counter = 4;
-            }
-            counter++;
-        }
-        if(target.equals(human.getLocation())){            
-            return new WaitCommand();
-        }else{
-            System.out.println("testing for bugs");
-            return new MoveCommand(human, target);
-        }
-    }
 
 }
 

@@ -7,6 +7,7 @@ import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
 import ca.ubc.ece.cpen221.mp4.ai.AI;
+import ca.ubc.ece.cpen221.mp4.ai.PredatorAI;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 
@@ -38,8 +39,8 @@ public class Fox implements ArenaAnimal {
 	 * @param initialLocation
 	 *            the location where this Fox will be created
 	 */
-	public Fox(AI foxAI, Location initialLocation) {
-		this.ai = foxAI;
+	public Fox(AI predatorAI, Location initialLocation) {
+		this.ai = predatorAI;
 		this.location = initialLocation;
 
 		this.energy = INITIAL_ENERGY;

@@ -24,7 +24,7 @@ public class Velociraptor implements ArenaAnimal {
     private static final int MIN_BREEDING_ENERGY = 500;
     private static final int VIEW_RANGE = 7;
     private static final int COOLDOWN = 3;
-    private static final ImageIcon velociraptorImage = Util.loadImage("raptor.gif");
+    private static final ImageIcon velociraptorImage = Util.loadImage("tiger.gif");
 
     private final AI ai;
 

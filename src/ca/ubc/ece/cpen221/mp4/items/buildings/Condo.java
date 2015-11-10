@@ -7,7 +7,7 @@ import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.items.Item;
 
 public class Condo implements Item{
-    private final static ImageIcon condoImage = Util.loadImage("hyena.gif");
+    private final static ImageIcon condoImage = Util.loadImage("cars.gif");
     //CHANGE THIS TO AN IMAGE OF A FUCKING CONDO
     private static final int INITIAL_ENERGY = 500;
     private static final int STRENGTH = 1000;

@@ -28,11 +28,11 @@ public class Main {
 	static final int INITIAL_FOXES = INITIAL_GRASS / 32;
 	static final int INITIAL_TIGERS = INITIAL_GRASS / 32;
 	static final int INITIAL_BEARS = INITIAL_GRASS / 40;
-	static final int INITIAL_HYENAS = INITIAL_GRASS / 32;
+	static final int INITIAL_RAPTORS = INITIAL_GRASS / 64;
 	static final int INITIAL_TANKS = INITIAL_GRASS / 200;
 	static final int INITIAL_TRUCKS = INITIAL_GRASS / 150;
 	static final int INITIAL_MOTORCYCLES = INITIAL_GRASS / 64;
-	static final int INITIAL_MANS = INITIAL_GRASS / 64;
+	static final int INITIAL_MANS = INITIAL_GRASS / 32;
 	static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
 
@@ -62,6 +62,7 @@ public class Main {
 		addMotorcycles(world);
 		addTanks(world);
 		addHumans(world);
+		addVelociraptors(world);
 		// TODO: You may add your own creatures here!
 	}
 
@@ -82,7 +83,7 @@ public class Main {
 	}
 
 	private void addFoxes(World world) {
-		FoxAI foxAI = new FoxAI();
+		PredatorAI foxAI = new PredatorAI();
 		for (int i = 0; i < INITIAL_FOXES; i++) {
 			Location loc = Util.getRandomEmptyLocation(world);
 			Fox fox = new Fox(foxAI, loc);
@@ -100,7 +101,7 @@ public class Main {
 			world.addActor(rabbit);
 		}
 	}
-	//don't make these add methods permanent
+
 	private void addMotorcycles(World world){
 	    VehicleAI vehicleAI = new VehicleAI();
 	    for(int i = 0; i < INITIAL_MOTORCYCLES; i++){
@@ -138,6 +139,16 @@ public class Main {
             Human human = new Human(humanAI, loc);
             world.addItem(human);
             world.addActor(human);
+        }
+    }
+    
+    private void addVelociraptors(World world){
+        PredatorAI predatorAI = new PredatorAI();
+        for (int i = 0; i < INITIAL_RAPTORS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Velociraptor raptor = new Velociraptor(predatorAI, loc);
+            world.addItem(raptor);
+            world.addActor(raptor);
         }
     }
 }
