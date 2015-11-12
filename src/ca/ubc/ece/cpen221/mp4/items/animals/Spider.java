@@ -18,7 +18,7 @@ public class Spider implements ArenaAnimal {
 
 	private static final int INITIAL_ENERGY = 80;
 	private static final int MAX_ENERGY = 130;
-	private static final int STRENGTH = 10;
+	private static final int STRENGTH = 11;
 	private static final int VIEW_RANGE = 2;
 	private static final int MIN_BREEDING_ENERGY = 5;
 	private static final int COOLDOWN = 1;
@@ -39,8 +39,8 @@ public class Spider implements ArenaAnimal {
 	 * @param initialLocation
 	 *            the location where this Fox will be created
 	 */
-	public Spider(AI predatorAI, Location initialLocation) {
-		this.ai = predatorAI;
+	public Spider(AI spiderAI, Location initialLocation) {
+		this.ai = spiderAI;
 		this.location = initialLocation;
 		this.energy = INITIAL_ENERGY;
 	}

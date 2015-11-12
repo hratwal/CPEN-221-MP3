@@ -39,7 +39,7 @@ public class PredatorAI extends ArenaAnimalAI{
      * @return: a set of locations containing edible items within eyesight
      * of the predator
      */
-    private Set<Location> identifyFood(ArenaWorld world, ArenaAnimal predator, 
+    protected Set<Location> identifyFood(ArenaWorld world, ArenaAnimal predator, 
             Set<Item> surroundings) {
         Set<Location> foodZones = new HashSet<Location>();
         Iterator<Item> it = surroundings.iterator();

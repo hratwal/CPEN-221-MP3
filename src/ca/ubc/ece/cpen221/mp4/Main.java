@@ -38,8 +38,8 @@ public class Main {
 	static final int INITIAL_MANS = INITIAL_GRASS / 32;
 	//static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
-	static final int INITIAL_CONDOS = 10;
-	static final int INITIAL_FACTORIES = 20;
+	static final int INITIAL_CONDOS = 0;
+	static final int INITIAL_FACTORIES = 0;
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -160,10 +160,10 @@ public class Main {
     }
     
 	private void addSpider(World world) {
-		PredatorAI predatorAI = new PredatorAI();
+		SpiderAI spiderAI = new SpiderAI();
 		for (int i = 0; i < INITIAL_SPIDERS; i++) {
 			Location loc = Util.getRandomEmptyLocation(world);
-			Spider spider = new Spider(predatorAI, loc);
+			Spider spider = new Spider(spiderAI, loc);
 			world.addItem(spider);
 			world.addActor(spider);
 		}

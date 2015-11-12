@@ -264,7 +264,9 @@ public class ArenaAnimalAI implements AI {
         directions.add(Direction.SOUTH);
         int counter = 0;
         while(counter < 4){
-            target = new Location(animal.getLocation(), directions.get(counter));
+            int random = (int) Math.random()*(4-counter);
+            target = new Location(animal.getLocation(), directions.get(random));
+            directions.remove(random);
             if(Util.isValidLocation(world, target) && 
                     isLocationEmpty(world, animal, target)){
                 counter = 4;

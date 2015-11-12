@@ -55,10 +55,10 @@ public class BuildingAI{
             }
             counter++;
         }
-		if(doStuffCounter > 20 && building.getName().equals("Factory")){
+		if(doStuffCounter > 50 && building.getName().equals("Factory")){
 		    doStuffCounter = 0;
 		    return new BuildVehicleCommand(building, target);
-		}if(doStuffCounter > 45 && building.getName().equals("JurassicPark")){
+		}if(doStuffCounter > 50 && building.getName().equals("JurassicPark")){
 		    doStuffCounter = 0;
 		    //return new SpawnRaptorCommand(building, target);
 		}
