@@ -59,7 +59,8 @@ public class VehicleAI {
         Direction dir = vehicle.getDir();
         Set<Location> dangerZones = getNearbyDangerZones(world, vehicle);
         Iterator<Location> it = dangerZones.iterator();
-        boolean needToChangeDir = (vehicle.getStepsSinceTurn() > 15);
+        boolean needToChangeDir = (vehicle.getStepsSinceTurn() > 15 ||
+                nearBuilding(world, vehicle));
         // automatically changes directions after 15 turns for variety
 
         // checks if there are any dangers in the direction it's currently
@@ -325,5 +326,26 @@ public class VehicleAI {
         double rand = Math.random() * 3;
         return directions.get((int) rand);
 
+    }
+    /**
+     * returns true if the given vehicle is near a building, false otherwise
+     * @param world: the world the vehicle inhabits
+     * @param vehicle: the vehicle in question
+     * 
+     * @return true if the given vehicle is within 1 space of a building, false 
+     * otherwise
+     */
+    private boolean nearBuilding(World world, Vehicle vehicle){
+        Set<Item> nearbyItems = world.searchSurroundings(vehicle.getLocation(), 1);
+        Iterator<Item> it = nearbyItems.iterator();
+        while(it.hasNext()){
+            Item item = it.next();
+            if(item.getName().equals("Condo") ||
+                    item.getName().equals("Factory") ||
+                    item.getName().equals("JurassicPark")){
+                return true;
+            }
+        }
+        return false;
     }
 }
