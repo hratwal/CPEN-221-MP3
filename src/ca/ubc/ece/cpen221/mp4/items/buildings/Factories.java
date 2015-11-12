@@ -14,7 +14,7 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
  * Factory will be built by the {@link Human} whenever the Human has enough energy
  */
 public class Factories implements Item, Actor {
-	private final static ImageIcon factoryImage = Util.loadImage("tiger.gif");
+	private final static ImageIcon factoryImage = Util.loadImage("factory.gif");
 	private static final int INITIAL_ENERGY = 250;
 	private static final int STRENGTH = 1000;
 	private int energy = INITIAL_ENERGY; 

@@ -15,7 +15,7 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
  * energy
  */
 public class Condos implements Item, Actor {
-    private final static ImageIcon condoImage = Util.loadImage("hunter.gif");
+    private final static ImageIcon condoImage = Util.loadImage("condo.gif");
     private static final int INITIAL_ENERGY = 500;
     private static final int STRENGTH = 1000;
     private int energy = INITIAL_ENERGY;
