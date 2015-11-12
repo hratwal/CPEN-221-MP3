@@ -28,19 +28,22 @@ public class BuildCommand implements Command{
     @Override
     public void execute(World world) throws InvalidCommandException {
         if (!Util.isValidLocation(world, target) || !Util.isLocationEmpty(world, target)) {
-            throw new InvalidCommandException("Invalid BreedCommand: Invalid/non-empty breeding target location");
+            throw new InvalidCommandException("Invalid BuildCommand: "
+                    + "Invalid/non-empty building target location");
         }
         double randomValue = Math.random() * 10;
         if(randomValue < 8){
             Condos building = new Condos(target);
-            //building.moveTo(target); What is the purpose of this method?
+            building.moveTo(target); 
             world.addItem(building);
+            world.addActor(building);
             //maybe put in an actor method if they need to lose health?
         }else{
             //switch this to factories once they're implemented
             Factories building = new Factories(target);
-            //building.moveTo(target); 
+            building.moveTo(target); 
             world.addItem(building);
+            world.addActor(building);
         }
         item.loseEnergy(item.getEnergy() / 2);
     }

@@ -6,6 +6,8 @@ import ca.ubc.ece.cpen221.mp4.ai.*;
 import ca.ubc.ece.cpen221.mp4.items.Gardener;
 import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
+import ca.ubc.ece.cpen221.mp4.items.buildings.Condos;
+import ca.ubc.ece.cpen221.mp4.items.buildings.Factories;
 import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
 import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.*;
@@ -36,6 +38,8 @@ public class Main {
 	static final int INITIAL_MANS = INITIAL_GRASS / 32;
 	//static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
+	static final int INITIAL_CONDOS = 10;
+	static final int INITIAL_FACTORIES = 20;
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -64,6 +68,8 @@ public class Main {
 		addTanks(world);
 		addHumans(world);
 		addVelociraptors(world);
+		addCondos(world);
+		addFactories(world);
 		// TODO: You may add your own creatures here!
 	}
 
@@ -162,4 +168,22 @@ public class Main {
 			world.addActor(spider);
 		}
 	}
+	
+	private void addCondos(World world) {
+        for (int i = 0; i < INITIAL_CONDOS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Condos condo = new Condos(loc);
+            world.addItem(condo);
+            world.addActor(condo);
+        }
+    }
+    
+    private void addFactories(World world) {
+        for (int i = 0; i < INITIAL_FACTORIES; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Factories factory = new Factories(loc);
+            world.addItem(factory);
+            world.addActor(factory);
+        }
+    }
 }

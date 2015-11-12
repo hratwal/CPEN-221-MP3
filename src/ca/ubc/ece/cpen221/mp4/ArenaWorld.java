@@ -32,4 +32,5 @@ public interface ArenaWorld {
 	 */
 	int getHeight();
 
+
 }
