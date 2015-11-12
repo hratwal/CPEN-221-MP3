@@ -12,6 +12,7 @@ import ca.ubc.ece.cpen221.mp4.World;
 import ca.ubc.ece.cpen221.mp4.commands.BreedCommand;
 import ca.ubc.ece.cpen221.mp4.commands.BuildVehicleCommand;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
+import ca.ubc.ece.cpen221.mp4.commands.SpawnRaptorCommand;
 import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
 import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
@@ -60,7 +61,7 @@ public class BuildingAI{
 		    return new BuildVehicleCommand(building, target);
 		}if(doStuffCounter > 50 && building.getName().equals("JurassicPark")){
 		    doStuffCounter = 0;
-		    //return new SpawnRaptorCommand(building, target);
+		    return new SpawnRaptorCommand(building, target);
 		}
 		return new WaitCommand();
 	}

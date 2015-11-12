@@ -32,15 +32,18 @@ public class BuildCommand implements Command{
                     + "Invalid/non-empty building target location");
         }
         double randomValue = Math.random() * 10;
-        if(randomValue < 5){
+        if(randomValue < 3.33){
             Condos building = new Condos(target);
             building.moveTo(target); 
             world.addItem(building);
             world.addActor(building);
-            //maybe put in an actor method if they need to lose health?
-        }else{
-            //switch this to factories once they're implemented
+        }else if(randomValue < 6.67){
             Factories building = new Factories(target);
+            building.moveTo(target); 
+            world.addItem(building);
+            world.addActor(building);
+        }else{
+            JurassicPark building = new JurassicPark(target);
             building.moveTo(target); 
             world.addItem(building);
             world.addActor(building);

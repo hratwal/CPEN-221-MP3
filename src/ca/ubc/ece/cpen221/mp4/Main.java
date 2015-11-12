@@ -8,6 +8,7 @@ import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
 import ca.ubc.ece.cpen221.mp4.items.buildings.Condos;
 import ca.ubc.ece.cpen221.mp4.items.buildings.Factories;
+import ca.ubc.ece.cpen221.mp4.items.buildings.JurassicPark;
 import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
 import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.*;
@@ -38,8 +39,9 @@ public class Main {
 	static final int INITIAL_MANS = INITIAL_GRASS / 32;
 	//static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
-	static final int INITIAL_CONDOS = 5;
-	static final int INITIAL_FACTORIES = 5;
+	static final int INITIAL_CONDOS = 3;
+	static final int INITIAL_FACTORIES = 3;
+	static final int INITIAL_PARKS = 3;
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -70,6 +72,7 @@ public class Main {
 		addVelociraptors(world);
 		addCondos(world);
 		addFactories(world);
+		addParks(world);
 		// TODO: You may add your own creatures here!
 	}
 
@@ -184,6 +187,15 @@ public class Main {
             Factories factory = new Factories(loc);
             world.addItem(factory);
             world.addActor(factory);
+        }
+    }
+    
+    private void addParks(World world) {
+        for (int i = 0; i < INITIAL_PARKS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            JurassicPark park = new JurassicPark(loc);
+            world.addItem(park);
+            world.addActor(park);
         }
     }
 }

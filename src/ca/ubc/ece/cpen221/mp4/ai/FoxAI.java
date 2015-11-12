@@ -16,7 +16,9 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
 
 /**
- * Your Fox AI.
+ * This class is just a copy of PredatorAI. In our implementation, we just use
+ * PredatorAI for foxes instead of FoxAI. We copied the code into this method
+ * so it can be used for the competition.
  */
 public class FoxAI extends ArenaAnimalAI{
     private int energy;
