@@ -20,7 +20,7 @@ public class Velociraptor implements ArenaAnimal {
 	private static final int INITIAL_ENERGY = 400;
 	private static final int MAX_ENERGY = 600;
 	private static final int STRENGTH = 600;
-	private static final int MIN_BREEDING_ENERGY = 500;
+	private static final int MIN_BREEDING_ENERGY = 200;
 	private static final int VIEW_RANGE = 7;
 	private static final int COOLDOWN = 3;
 	private static final ImageIcon velociraptorImage = Util.loadImage("raptor.gif");

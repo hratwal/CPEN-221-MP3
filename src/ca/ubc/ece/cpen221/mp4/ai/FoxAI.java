@@ -58,7 +58,7 @@ public class FoxAI extends ArenaAnimalAI{
             if (item.getStrength() < predator.getStrength()
                     && item.getMeatCalories() > 0
                     && !item.getName().equals("Gnat")
-                    && !item.getName().equals("Spider")) { //Should foxes eat spiders?
+                    && !item.getName().equals("Spider")) { 
                 foodZones.add(item.getLocation());
             }
         }

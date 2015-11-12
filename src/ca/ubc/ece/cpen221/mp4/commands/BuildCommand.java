@@ -3,14 +3,12 @@ package ca.ubc.ece.cpen221.mp4.commands;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 import ca.ubc.ece.cpen221.mp4.items.buildings.*;
 
 public class BuildCommand implements Command{
     private final LivingItem item;
     private final Location target;
-    private final AI ai; 
 
     /**
      * Constructor where <code>item</code> is the LivingItem that is breeding
@@ -22,28 +20,37 @@ public class BuildCommand implements Command{
      * @param target
      *            the location where child will appear
      */
-    public BuildCommand(AI buildingAI, LivingItem item, Location target) {
-        ai = buildingAI;
-    	this.item = item;
+    public BuildCommand(LivingItem item, Location target) {
+        this.item = item;
         this.target = target;
     }
 
     @Override
     public void execute(World world) throws InvalidCommandException {
         if (!Util.isValidLocation(world, target) || !Util.isLocationEmpty(world, target)) {
-            throw new InvalidCommandException("Invalid BreedCommand: Invalid/non-empty breeding target location");
+            throw new InvalidCommandException("Invalid BuildCommand: "
+                    + "Invalid/non-empty building target location");
         }
         double randomValue = Math.random() * 10;
-        if(randomValue < 8){
-            Condos building = new Condos(ai, target);
-            //building.moveTo(target); What is the purpose of this method?
+        if(randomValue < 3){
+            Condos building = new Condos(target);
+            building.moveTo(target); 
             world.addItem(building);
-            //maybe put in an actor method if they need to lose health?
-        }else{
-            //switch this to factories once they're implemented
-            Factories building = new Factories(ai, target);
-            //building.moveTo(target); 
-            world.addItem(building);
+            world.addActor(building);
+        }	else{
+        		if(randomValue >= 3 && randomValue < 6 ){
+        			Factories building = new Factories(target);
+        			building.moveTo(target); 
+        			world.addItem(building);
+        			world.addActor(building);
+        		}	else{
+        				if(randomValue < 10){
+        					JurassicPark building = new JurassicPark(target);
+                			building.moveTo(target); 
+                			world.addItem(building);
+                			world.addActor(building);
+        				}
+        		}
         }
         item.loseEnergy(item.getEnergy() / 2);
     }

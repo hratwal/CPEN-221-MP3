@@ -16,8 +16,8 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 public class Spider implements ArenaAnimal {
 
-	private static final int INITIAL_ENERGY = 5;
-	private static final int MAX_ENERGY = 10;
+	private static final int INITIAL_ENERGY = 25;
+	private static final int MAX_ENERGY = 50;
 	private static final int STRENGTH = 10;
 	private static final int VIEW_RANGE = 2;
 	private static final int MIN_BREEDING_ENERGY = 5;

@@ -18,7 +18,7 @@ public class Tank extends Vehicle{
     private static final int VIEW_RANGE = 6;
     private static final int START_COOLDOWN = 12;
     private static final int MIN_COOLDOWN = 6;
-    private static final ImageIcon IMAGE = Util.loadImage("unknown.gif");
+    private static final ImageIcon IMAGE = Util.loadImage("tank.gif");
     private static final String NAME = "Tank";
     private static final int ACCEL_TURNS = 6;
     
