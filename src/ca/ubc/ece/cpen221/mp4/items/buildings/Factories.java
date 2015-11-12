@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
+import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.items.Item;
 
 /**
@@ -16,6 +17,7 @@ public class Factories implements Item {
 	private int energy = INITIAL_ENERGY; 
 	private Location location;
 	private boolean isDead;
+	private final AI ai;
 
 	/**
 	 * Build a factory at <code> location </code>. The location must be valid and
@@ -24,7 +26,8 @@ public class Factories implements Item {
 	 * @param location
 	 *            : the location where this grass will be created
 	 */
-	public Factories(Location location) {
+	public Factories(AI buildingAI, Location location) {
+		ai = buildingAI;
 		this.location = location;
 		this.isDead = false;
 	}

@@ -1,45 +1,47 @@
 package ca.ubc.ece.cpen221.mp4.items.buildings;
 
-package ca.ubc.ece.cpen221.mp4.items.buildings;
-
 import javax.swing.ImageIcon;
 
+import ca.ubc.ece.cpen221.mp4.Actor;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
+import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.items.Item;
 
 /**
- * Spiderweb will be built by the {@link Human} whenever the Human has enough energy
+ * Jurassic Park will be built by the {@link Human} whenever the Human has enough energy
  */
-
-public class SpiderWeb implements Item {
-	private final static ImageIcon spiderWeb = Util.loadImage("condo.gif");
-	private static final int INITIAL_ENERGY = 20;
-	private static final int STRENGTH = 20;
+public class JurassicPark implements Item, Actor {
+	private final static ImageIcon jurassicImage = Util.loadImage("hunter.gif");
+	private static final int INITIAL_ENERGY = 500;
+	private static final int STRENGTH = 1000;
 	private int energy = INITIAL_ENERGY; 
+	private static final int COOLDOWN = 1;
 	private Location location;
 	private boolean isDead;
+	private final AI ai;
 
 	/**
-	 * Build a spiderweb at <code> location </code>. The location must be valid and
+	 * Build Jurassic Park at <code> location </code>. The location must be valid and
 	 * empty
 	 *
 	 * @param location
 	 *            : the location where this grass will be created
 	 */
-	public SpiderWeb(Location location) {
+	public JurassicPark(AI buildingAI, Location location) {
+		ai = buildingAI;
 		this.location = location;
 		this.isDead = false;
 	}
 
 	@Override
 	public ImageIcon getImage() {
-		return condoImage;
+		return jurassicImage;
 	}
 
 	@Override
 	public String getName() {
-		return "condo";
+		return "Jurassic Park";
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package ca.ubc.ece.cpen221.mp4.ai;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import ca.ubc.ece.cpen221.mp4.ArenaWorld;
 import ca.ubc.ece.cpen221.mp4.Direction;
@@ -15,6 +14,7 @@ import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
 
 public class BuildingAI implements AI {
+	
 	
 	@Override
 	public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
