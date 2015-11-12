@@ -20,7 +20,7 @@ public class Humans implements ArenaAnimal {
 	private static final int INITIAL_ENERGY = 200;
 	private static final int MAX_ENERGY = 300;
 	private static final int STRENGTH = 300;
-	private static final int MIN_BREEDING_ENERGY = 201;
+	private static final int MIN_BREEDING_ENERGY = 100;
 	private static final int VIEW_RANGE = 3;
 	private static final int COOLDOWN = 5;
 	private static final ImageIcon humanImage = Util.loadImage("man.gif");

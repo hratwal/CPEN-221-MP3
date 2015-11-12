@@ -32,7 +32,7 @@ public class BuildCommand implements Command{
                     + "Invalid/non-empty building target location");
         }
         double randomValue = Math.random() * 10;
-        if(randomValue < 8){
+        if(randomValue < 5){
             Condos building = new Condos(target);
             building.moveTo(target); 
             world.addItem(building);
