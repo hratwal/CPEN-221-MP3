@@ -235,8 +235,11 @@ public class ArenaAnimalAI implements AI {
         }
         if(target.equals(animal.getLocation())){            
             return new WaitCommand();
-        }else{
+        }else if (Util.isValidLocation(world, target) && 
+                this.isLocationEmpty(world, animal, target)){
             return new MoveCommand(animal, target);
+        }else{
+            return new WaitCommand();
         }
     }
     
